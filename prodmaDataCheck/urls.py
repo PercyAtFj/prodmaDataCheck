@@ -18,8 +18,9 @@ from django.contrib import admin
 from diffQuery import views as diffQuery_view
 
 urlpatterns = [
-    url(r'^$', diffQuery_view.index),
-    url(r'^queryDiff/', diffQuery_view.queryDiffRecords),
+    url(r'^$', diffQuery_view.home),
+    url(r'^index/queryDiff', diffQuery_view.queryDiffRecords),
+    url(r'^index/', diffQuery_view.index),
     url(r'^admin/', admin.site.urls),
     url(r'^export/', diffQuery_view.export),
     
