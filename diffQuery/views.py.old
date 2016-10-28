@@ -6,16 +6,9 @@ from io import BytesIO
 from pyexcel_xlsxw import save_data
 import sqlite3
 import json
-import test
 
 def index(request):
     return render(request, 'index.html')
-
-def fund(request):
-    return render(request, 'fund.html')
-
-def diffFundRecordsPage(request):
-    return render(request, 'fundDiffRecords.html')
 
 def home(request):
     return render(request, 'home.html')
@@ -38,7 +31,7 @@ def export(request):
                     record.append(aa + " | " + bb)
                 else:
                     record.append(item['fromProdma'][j])
-            resultList.append(record)
+            resultList.append(record)    
     #data = {"Sheet 1": [[1, 2, 3], [4, 5, 6]], "Sheet 2": [[7, 8, 9], [10, 11, 12]]}
     data = {"Sheet 1": resultList}
     io = BytesIO()
@@ -75,18 +68,7 @@ def queryDiffRecord_internal():
 
     return resultJson
 
-def queryDiffFundRecords(request):
+def queryDiffRecords(request):
 #    with open(r"/home/vagrant/lixc/tutorial/tutorial/mylog.txt", encoding="utf-8") as fh:
 #        a = json.load(fh)
-    return HttpResponse(test.queryDiffFundRecords(), content_type='application/json')
-
-
-def queryFundDiff(request):
-
-    return HttpResponse(test.queryFundData(), content_type='application/json')
-
-def queryDiffRecords(request):
-    #    with open(r"/home/vagrant/lixc/tutorial/tutorial/mylog.txt", encoding="utf-8") as fh:
-    #        a = json.load(fh)
-        return HttpResponse(json.dumps(queryDiffRecord_internal()), content_type='application/json')
-
+    return HttpResponse(json.dumps(queryDiffRecord_internal()), content_type='application/json')

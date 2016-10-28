@@ -1,0 +1,32 @@
+#!/usr/bin/python  
+# -*- coding: UTF-8 -*-  
+import fundProdma
+import fundProdCenter
+import os   
+import json
+os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'   
+  
+if __name__=="__main__":  
+    
+    resultFundProdma = fundProdma.getFundData()  
+    resultFundProdCenter = fundProdCenter.getFundData()
+    results = []
+    for rowM in resultFundProdma:
+	for rowC in resultFundProdCenter:
+	    if rowM[1] == rowC[1]:
+		dict = {}			
+		dict["productname"] = rowM[0]
+		dict["seccode"]= rowM[1]
+		dict["isETF"] = rowM[2] if rowM[2] == rowC[2] else rowM[1] + " | " + row{2}
+		dict["isLof"]= rowM[3] if rowM[2] == rowC[2] else rowM[1] + " | " + row{2}
+		dict["isQDII"] = rowM[3] if rowM[2] == rowC[2] else rowM[1] + " | " + row{2} 
+		dict["seccode"]= rowM[3] if rowM[2] == rowC[2] else rowM[1] + " | " + row{2}
+		dict["productname"] = rowM[3] if rowM[2] == rowC[2] else rowM[1] + " | " + row{2}
+		dict["seccode"]= 
+		dict["productname"] = rowM[0]
+		dict["seccode"]= rowM[1]
+		dict["productname"] = rowM[0]
+		dict["seccode"]= rowM[1]
+
+
+    print result
