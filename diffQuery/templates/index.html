@@ -3,22 +3,30 @@
 <head>
 <link rel="stylesheet" type="text/css" media="screen" href="/static/jqGrid/themes/redmond/jquery-ui-1.8.2.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="/static/jqGrid/themes/ui.jqgrid.css" />
+<style>
+  *{margin:0;padding:0} 
+</style>
+<script src="/static/jqGrid/js/jquery-1.7.2.min.js"></script>
 </head>
 <body>
-<h6 style='color:red'>*产品管理平台数据与天天基金网数据差异的地方用红色标注了</h6>
-<h6 style='color:red'>*符号"|"左边为产品管理平台数据，后面为天天基金网数据</h6>
+{% include 'header.html' %}
+<div style="margin-left:auto;margin-right:auto;width:450px">
+<p style='color:red;font-family: Microsoft Yahei,tahoma,arial,宋体;font-size: 12px;'>*产品管理平台数据与天天基金网数据差异的地方用红色标注了,*符号"|"左边为产品管理平台数据，后面为天天基金网数据</p>
 <a id="export" href="javascript:void(0);">导出</a>
-<table id="list2"></table>
-<script src="/static/jqGrid/js/jquery-1.7.2.min.js"></script>
+<table id="feeAndUnitnvCheckList"></table>
+</div>
 <script src="/static/jqGrid/js/jquery.jqGrid.min.js"></script>
 <script>
     $(document).ready(function(){
-      jQuery("#list2").jqGrid(
+      jQuery("#feeAndUnitnvCheckList").jqGrid(
       {
         datatype : "local",
         multiselect: false,
+        caption: "产品净值费率核对",
+        shrinkToFit: false,
+        autoScroll: true,
         colNames : [ '交易代码','单位净值', '累计净值', '管理费率', '托管费率'],
-        colModel : [ 
+        colModel : [
             {name : 'seccode',index : 'seccode',width : 55}, 
             {name : 'unitnv',index : 'unitnv',width : 90}, 
             {name : 'accumulatedUnitnv',index : 'accumulatedUnitnv',width : 100}, 
@@ -29,7 +37,7 @@
             //updateData();
         },
         autowidth: false,
-        height: '100%',
+        height: $(window).height() - $("#feeAndUnitnvCheckList").offset().top - 152,
         rowNum: 150
       });
 
@@ -41,10 +49,10 @@
 	    var type = ["trustFee","manageFee","accumulatedUnitnv","unitnv"]
             for (var i = 0; i < response.length; i++) {
                 if( !response[i].fromProdma && response[i].fromEastmoney){
-                    jQuery("#list2").jqGrid('addRowData', i + 1, response[i].fromEastmoney);
+                    jQuery("#feeAndUnitnvCheckList").jqGrid('addRowData', i + 1, response[i].fromEastmoney);
                     $("#" + (i + 1)).css("background-color","#F4D7C9");
                 } else if (response[i].fromProdma && !response[i].fromEastmoney){
-                    jQuery("#list2").jqGrid('addRowData', i + 1, response[i].fromProdma);
+                    jQuery("#feeAndUnitnvCheckList").jqGrid('addRowData', i + 1, response[i].fromProdma);
                     $("#" + (i + 1)).css("background-color","#F4D7C9");
                 } else {
                     var record = response[i]["fromProdma"];
@@ -53,11 +61,11 @@
                             record[type[j]] = record[type[j]] + " | " + response[i]["fromEastmoney"][type[j]];
                         }
                     }
-                    jQuery("#list2").jqGrid('addRowData', i + 1, record);
+                    jQuery("#feeAndUnitnvCheckList").jqGrid('addRowData', i + 1, record);
 		    //$("#" + (i + 1)).css("background-color","#F4D7C9");
                 }
             } 
-	    $("#list2 td:contains('|')").css("color","red");
+	    $("#feeAndUnitnvCheckList td:contains('|')").css("color","red");
         }
     });
     $("#export").bind('click',function(){

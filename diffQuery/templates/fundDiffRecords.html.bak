@@ -2,18 +2,15 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" media="screen" href="/static/jqGrid/themes/redmond/jquery-ui-1.8.2.custom.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="/static/jqGrid/themes/ui.jqgrid.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/static/js/jqGrid/themes/redmond/jquery-ui-1.8.2.custom.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/static/js/jqGrid/themes/ui.jqgrid.css" />
 <style>
-  *{margin:0;padding:0}
   .ui-widget-header {
       background: #ceddef url(images/bg_com_top.png) left top repeat-x;)
   }
 </style>
-<script src="/static/jqGrid/js/jquery-1.7.2.min.js"></script>
 </head>
 <body>
-  {% include 'header.html' %}
     <select name="sel" id="sel">
         <option value="DiffFundRecords">生产环境vs产品中心库</option>
         <option value="OnleProdmaFundData">生产环境平台库冗余记录表</option>
@@ -21,20 +18,16 @@
         <option value="FundProdmaOriginalData">生产环境平台库原表</option>
         <option value="FundProdCenterOriginalData">产品中心库原表</option>
     </select>
-    <span style="width:20px;"></span>
-    <button id="btn">查询</button>
     <hr/>
 <table id="fundGrid"></table>
-<script src="/static/jqGrid/js/jquery.jqGrid.src.js"></script>
-<script type="text/javascript" src="/static/jqGrid/js/i18n/grid.locale-cn.js"></script>
+<script src="/static/js/jqGrid/js/jquery-1.7.2.min.js"></script>
+<script src="/static/js/jqGrid/js/jquery.jqGrid.min.js"></script>
 <script>
     $(document).ready(function(){
       jQuery("#fundGrid").jqGrid(
       {
-        datatype : "json",
-        mtype: "get",
-//        url: "queryDiffFundRecords/",
-        caption: "",
+        datatype : "local",
+        caption: "生产环境平台库核对记录",
         rownumbers: true,
         shrinkToFit: false,
         autoScroll: true,
@@ -66,7 +59,7 @@
         },
         autowidth: true,
         height: $(window).height() - $("#fundGrid").offset().top - 152,
-        rowNum: 50000 
+        rowNum: 150
       });
 
     //$("#export").bind('click',function(){
@@ -75,7 +68,7 @@
 //	    $(me).attr("href","javascript:void(0);");
 //	},100);
 //})
-/*    $("#sel").bind('change',function(){
+    $("#sel").bind('change',function(){
         var url = "query" + $("#sel").val();
          $.ajax({
             type: "get",
@@ -87,14 +80,6 @@
                 }
             }
         });
-    })*/
-
-    $("#btn").bind('click',function(){
-      $("#fundGrid").setCaption($("#sel").find("option:selected").text())
-      $("#fundGrid").jqGrid("queryGrid",{}, {
-          url: "query" + $("#sel").val(),
-          datatype: "json"
-      });
     })
 });
 </script>

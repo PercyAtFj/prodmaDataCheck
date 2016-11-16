@@ -9,13 +9,15 @@ import json
 import test
 
 def index(request):
-    return render(request, 'index.html')
+    str = "index"
+    return render(request, 'index.html',{'page':str})
 
 def fund(request):
-    return render(request, 'fund.html')
+    str = "fund"
+    return render(request, 'fund.html',{'page':str})
 
-def diffFundRecordsPage(request):
-    return render(request, 'fundDiffRecords.html')
+#def diffFundRecordsPage(request):
+#    return render(request, 'fundDiffRecords.html')
 
 def home(request):
     return render(request, 'home.html')
@@ -80,6 +82,9 @@ def queryDiffFundRecords(request):
 #        a = json.load(fh)
     return HttpResponse(test.queryDiffFundRecords(), content_type='application/json')
 
+def queryFun(request,funtionName):
+    fun = getattr(test,funtionName)
+    return HttpResponse(fun(), content_type='application/json')
 
 def queryFundDiff(request):
 

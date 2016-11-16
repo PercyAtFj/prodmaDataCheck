@@ -1,0 +1,54 @@
+<style>
+    .ui-widget-header {
+          background: #ceddef url(images/bg_com_top.png) left top repeat-x;)
+      }
+
+      ul.dropdown-menu {
+        margin: 0px 0px 10px 0px;
+        padding: 0;
+        float: left;
+        border: 0 none;
+        width: 100%;
+        list-style: none;
+        background-color: #0593d3;
+        text-transform: uppercase;
+      }
+
+      ul li {
+        float: left;
+        border-right: 1px solid #288;
+      }
+
+      ul.dropdown-menu li:hover {
+          background: #0482ba;
+          color: #FFF;
+      }
+      ul.dropdown-menu li.on {
+          background: #0482ba;
+          color: #FFF;
+      }
+
+      /* Hack to make IE/Mac play nice */
+      li a {
+        padding: 0 2em;
+        line-height: 2.5em;
+        text-decoration: none;
+        color: #fff;
+        float: left;
+        display: block;
+      }
+</style>
+<div>
+  <input type="hidden" id="pageTag" value="{{page}}">
+  <ul id="mainNav" class="dropdown-menu">
+        <li class="dropdown-submenu"><a href="javascript:void(0)">首页</a></li>
+        <li class ="dropdown-submenu" id="index"><a href="/index">产品净值费率审查</a></li>
+        <li class ="dropdown-submenu" id="fund"><a href="/fund">产品数据审查</a></li>
+  </ul>
+</div>
+<script>
+  $(function(){
+    var pageTag = $("#pageTag").val();
+    $("#" + pageTag).addClass("on")
+  })
+</script>

@@ -23,9 +23,6 @@ urlpatterns = [
     url(r'^index/$', diffQuery_view.index),
     url(r'^admin/', admin.site.urls),
     url(r'^export/', diffQuery_view.export),
-    url(r'^fund/diffFundRecordsPage', diffQuery_view.diffFundRecordsPage),
-    url(r'^fund/queryDiffFundRecords', diffQuery_view.queryDiffFundRecords),
-    url(r'^fund/queryFundDiff', diffQuery_view.queryFundDiff),
+    url(r'^fund/(\w+)/$', diffQuery_view.queryFun),
     url(r'^fund/$', diffQuery_view.fund),
-    
 ]
