@@ -6,7 +6,7 @@ from io import BytesIO
 from pyexcel_xlsxw import save_data
 import sqlite3
 import json
-import test
+import fundProdManager
 
 def index(request):
     str = "index"
@@ -77,19 +77,21 @@ def queryDiffRecord_internal():
 
     return resultJson
 
-def queryDiffFundRecords(request):
+#def queryDiffFundRecords(request):
 #    with open(r"/home/vagrant/lixc/tutorial/tutorial/mylog.txt", encoding="utf-8") as fh:
 #        a = json.load(fh)
-    return HttpResponse(test.queryDiffFundRecords(), content_type='application/json')
+#    return HttpResponse(fundProdManager.queryDiffFundRecords(), content_type='application/json')
 
+#产品数据核对
 def queryFun(request,funtionName):
-    fun = getattr(test,funtionName)
+    fun = getattr(fundProdManager,funtionName)
     return HttpResponse(fun(), content_type='application/json')
 
-def queryFundDiff(request):
+#def queryFundDiff(request):
 
-    return HttpResponse(test.queryFundData(), content_type='application/json')
+#    return HttpResponse(fundProdManager.queryFundData(), content_type='application/json')
 
+#产品净值费率核对
 def queryDiffRecords(request):
     #    with open(r"/home/vagrant/lixc/tutorial/tutorial/mylog.txt", encoding="utf-8") as fh:
     #        a = json.load(fh)
